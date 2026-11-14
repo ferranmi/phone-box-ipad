@@ -58,5 +58,8 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="PhoneBox.Agent.Tests" />
+    <EmbeddedResource
+    Include="..\..\web\ipad\**\*"
+    LogicalName="ipad/%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

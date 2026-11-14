@@ -261,6 +261,34 @@ app.MapGet("/panel/{*file}", (string? file, HttpRequest req) =>
     };
     return AppPaths.Resource("www/" + file) is { } s ? Results.Stream(s, type) : Results.NotFound();
 });
+
+// Independent browser dashboard for iPad.
+// This first version is available through the local agent listener only.
+app.MapGet("/ipad/{*file}", (string? file, HttpRequest req) =>
+{
+    if (string.IsNullOrEmpty(file) && !req.Path.Value!.EndsWith('/'))
+        return Results.Redirect("/ipad/" + req.QueryString);
+
+    file = string.IsNullOrEmpty(file) ? "index.html" : file;
+
+    if (!System.Text.RegularExpressions.Regex.IsMatch(
+            file, @"^(assets/)?[A-Za-z0-9_.-]+$") ||
+        file.Contains(".."))
+        return Results.NotFound();
+
+    var type = Path.GetExtension(file) switch
+    {
+        ".html" => "text/html; charset=utf-8",
+        ".js" => "text/javascript; charset=utf-8",
+        ".css" => "text/css; charset=utf-8",
+        _ => "application/octet-stream"
+    };
+
+    return AppPaths.Resource("ipad/" + file) is { } stream
+        ? Results.Stream(stream, type)
+        : Results.NotFound();
+});
+
 app.MapGet("/favicon.ico", () => AppPaths.Resource("phonebox.ico") is { } s ? Results.Stream(s, "image/x-icon") : Results.NotFound());
 
 // The version lets the settings page save only over what it loaded (X-Config-Version, see ConfigStore.Save).

@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#10131b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>PhoneBox Dashboard</title>
+    <link rel="stylesheet" href="/ipad/styles.css">
+</head>
+<body>
+    <main class="dashboard">
+        <header class="header">
+            <div>
+                <h1>PhoneBox</h1>
+                <p id="hostname">Windows Dashboard</p>
+            </div>
+
+            <div class="connection">
+                <span id="connection-dot" class="dot offline"></span>
+                <span id="connection-text">Conectando...</span>
+            </div>
+        </header>
+
+        <section class="metrics">
+            <article class="metric">
+                <span class="metric-label">CPU</span>
+                <strong id="cpu-value">--%</strong>
+                <div class="progress">
+                    <div id="cpu-bar" class="progress-value"></div>
+                </div>
+                <small id="cpu-name">Procesador</small>
+            </article>
+
+            <article class="metric">
+                <span class="metric-label">MEMORIA RAM</span>
+                <strong id="ram-value">--%</strong>
+                <div class="progress">
+                    <div id="ram-bar" class="progress-value"></div>
+                </div>
+                <small id="ram-detail">-- / -- GB</small>
+            </article>
+        </section>
+
+        <footer class="footer">
+            <span id="last-update">Esperando datos...</span>
+            <span id="interface-mode">AUTO</span>
+        </footer>
+    </main>
+
+    <script src="/ipad/app.js"></script>
+</body>
+</html>
